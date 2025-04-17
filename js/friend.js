@@ -3,7 +3,6 @@ class definition for friend, a buddy that will follow around the mouse
 
 todo: 
     fix sprite jumping when it first starts moving
-    look into canvases?
 */
 
 const STOPTHRESHHOLD = 150; //the distance the friend will stop moving towards the mouse
@@ -16,18 +15,17 @@ class Friend {
         this.posX = 250;
         this.posY = 250;
 
+        //position position of the mouse
+        this.mouseX;
+        this.mouseY;
+        
         //stationary or currently moving
-        this.moving = true;
+        this.moving = false;
+        
+        this.direction = 0; //angle of the mouse from the friend in radians
+        this.distance = 0; //distance from the mouse in px
 
-        //angle of the mouse from the friend in radians
-        this.direction = 0;
 
-        //distance from the mouse in px
-        this.distance = 0;
-
-        //the position of the mouse
-        this.mouseX = 250;
-        this.mouseY = 250;
 
         // Create a DOM element to represent the friend
         this.element = document.createElement('img');
