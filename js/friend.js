@@ -107,10 +107,10 @@ class Friend {
 
         //save on sprites by flipping
 
-        if (this.direction < 1.5708 || this.direction > -1.5708) {
+        if (this.direction < Math.PI / 2 || this.direction > -1.5708) {
             this.element.style.transform = 'scaleX(-1)'
         }
-        if (this.direction > 1.5708 || this.direction < -1.5708) {
+        if (this.direction > Math.PI / 2 || this.direction < -1.5708) {
             this.element.style.transform = 'scaleX(1)'
         }
     }
