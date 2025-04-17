@@ -18,14 +18,11 @@ class Friend {
         //position position of the mouse
         this.mouseX;
         this.mouseY;
-        
-        //stationary or currently moving
-        this.moving = false;
-        
+
         this.direction = 0; //angle of the mouse from the friend in radians
         this.distance = 0; //distance from the mouse in px
-
-
+        
+        this.moving = false; //whether the friends is currently moving
 
         // Create a DOM element to represent the friend
         this.element = document.createElement('img');
@@ -34,11 +31,11 @@ class Friend {
         this.element.style.left = `${this.posX}px`; //offest is wierd so this causes it to to a jump when it starts moving
         this.element.style.top = `${this.posY}px`;
         this.element.style.width = '100px'
-        this.element.style.zIndex = '9999';
+        this.element.style.zIndex = '9999'; //keeps the image above everything else on the page
 
-        document.body.appendChild(this.element);
+        document.body.appendChild(this.element); //add the newly created element to the end of <body>
 
-        // Update the mouse movement and update the disnace
+        // Adds an event listener that will call the updateMousePosition function every time the mouse moves
         document.addEventListener('mousemove', this.updateMousePosition.bind(this));
 
         // Start the animation loop
@@ -46,7 +43,7 @@ class Friend {
     }
 
     /*
-    Calls the update position function at a frequency depending on the refresh rate
+    Calls the update position function and repeats itself at a frequency depending on the refresh rate if of the client
     */
     animate() {
         this.updatePosition();
@@ -80,7 +77,7 @@ class Friend {
             this.posX += Math.cos(this.direction) * SPEED;
             this.posY += Math.sin(this.direction) * SPEED;
 
-            //makes it follow fromthe center of the image
+            //makes the element follow from the center of the image instead of the top left
             this.element.style.left = `${this.posX - this.element.offsetWidth / 2}px`;
             this.element.style.top = `${this.posY - this.element.offsetHeight / 2}px`;
         }
@@ -103,13 +100,15 @@ class Friend {
     */
     updateSprite() {
 
-        //save on sprites by flipping
+        //flips horozontally depending on mouse position
         if (this.direction < Math.PI / 2 || this.direction > -1.5708) {
             this.element.style.transform = 'scaleX(-1)'
         }
         if (this.direction > Math.PI / 2 || this.direction < -1.5708) {
             this.element.style.transform = 'scaleX(1)'
         }
+
+        //still need to add animation changes depending on whether or not the friend is moving
     }
 }
 
