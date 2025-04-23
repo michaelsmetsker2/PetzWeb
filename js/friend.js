@@ -26,7 +26,7 @@ class Friend {
 
         // Create a DOM element to represent the friend
         this.element = document.createElement('img');
-        this.element.src = 'images/friend.jpg'
+        this.element.src = 'images/still.jpg'
         this.element.style.position = 'fixed';
         this.element.style.left = `${this.posX}px`; //offest is wierd so this causes it to to a jump when it starts moving
         this.element.style.top = `${this.posY}px`;
@@ -65,11 +65,14 @@ class Friend {
         this.direction = Math.atan2(differenceY, differenceX);
 
         //determines whether or not the object should continue to move
-        if (this.distance < STOPTHRESHHOLD) {
+        if (this.distance < STOPTHRESHHOLD && this.moving) {
             this.moving = false;
+            this.element.src = 'images/still.jpg'
         }
-        if (this.distance > FOLLOW_THRESHHOLD) {
+        if (this.distance > FOLLOW_THRESHHOLD && !this.moving) {
             this.moving = true;
+            console.log("test");
+            this.element.src = 'images/walking.gif'
         }
 
         if (this.moving) { 
